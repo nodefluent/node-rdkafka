@@ -83,6 +83,7 @@ describe('Consumer/Producer', function() {
   });
 
   afterEach(function(done) {
+    this.timeout(6000);
     var finished = 0;
     var called = false;
 
@@ -112,6 +113,7 @@ describe('Consumer/Producer', function() {
   });
 
   it('should be able to produce, consume messages, read position: subscribe/consumeOnce', function(done) {
+    this.timeout(8000);
     crypto.randomBytes(4096, function(ex, buffer) {
       producer.setPollInterval(10);
 
@@ -197,8 +199,7 @@ describe('Consumer/Producer', function() {
     });
   });
 
-  // @TODO Reactivate this test case when librdkafka fixes bug
-  xit('should be able to produce and consume messages: empty key and empty value', function(done) {
+  it('should be able to produce and consume messages: empty key and empty value', function(done) {
     this.timeout(20000);
     var key = '';
     var value = new Buffer('');
@@ -296,8 +297,6 @@ describe('Consumer/Producer', function() {
 
               // check that no new messages arrive, as the offset was committed
               consumer.once('data', function(message) {
-                console.log('First message offset:', lastOffset, 'New message',
-                  'offset:', message.offset);
                 done(new Error('Should never be here'));
               });
 

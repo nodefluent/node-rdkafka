@@ -1,12 +1,14 @@
 {
   "name": "node-rdkafka",
-  "version": "1.0.6",
+  "version": "2.3.2",
   "description": "Node.js bindings for librdkafka",
   "main": "lib/index.js",
   "scripts": {
     "configure": "node-gyp configure",
     "build": "node-gyp build",
-    "test": "make test"
+    "test": "make test",
+    "preinstall": "node util/configure",
+    "install": "node-gyp rebuild"
   },
   "keywords": [
     "kafka",
